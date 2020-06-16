@@ -13,6 +13,7 @@ public class Dathomiri extends Enemy
      */
     public Dathomiri(int level,int maxHp)
     {
+
         super("Dathomimri",level,maxHp);
     }
 

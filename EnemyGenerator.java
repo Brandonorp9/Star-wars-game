@@ -12,8 +12,6 @@ public class EnemyGenerator
 
     /**We read a list from the file then.
      * We create enemies to store them in the enemyList.
-     * @param ig it generates an item so we can create an enemy.
-     * @throws it throws an exception if the file is not found.
      */
     private EnemyGenerator()
     {
@@ -42,6 +40,8 @@ public class EnemyGenerator
         int maxHealth=5;
 
         Enemy enemy=null;
+
+        //we create a random enemy
         if(chooseEnemy==0)
         {
             enemy= new Dathomiri(level,level*maxHealth);
@@ -59,6 +59,7 @@ public class EnemyGenerator
             enemy=new Twilek(level,level*maxHealth);
         }
 
+        //decorate enemy
         int specialEnemy=rand.nextInt(2);
 
         if(specialEnemy==0)

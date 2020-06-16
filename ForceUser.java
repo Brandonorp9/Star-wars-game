@@ -16,7 +16,7 @@ public class ForceUser extends  EnemyDecorator
     }
 
     /**
-     * @param the heroe is the entity that we are going to attack
+     * @param heroe is the entity that we are going to attack
      * @ return we return the damage that we have dealt to the hero
      */
     public int attack(Entity heroe)

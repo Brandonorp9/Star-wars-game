@@ -11,16 +11,16 @@ public abstract class Entity
     int hp;
 
     /** We intiailze the entity.
-     * @param n	name of the entity
-     * @param l	level of the entity
-     * @param m	the max health of the entity
+     * @param name	name of the entity
+     * @param level	level of the entity
+     * @param maxHp	the max health of the entity
      */
-    public Entity(String n,int l,int m)
+    public Entity(String name,int level,int maxHp)
     {
-        name=n;
-        level=l;
-        maxHp=m;
-        hp=m;
+        this.name=name;
+        this.level=level;
+        this.maxHp=maxHp;
+        this.hp=maxHp;
     }
     public Entity()
     {

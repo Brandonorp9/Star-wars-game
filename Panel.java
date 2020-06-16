@@ -4,32 +4,52 @@ import java.awt.Point;
 import java.awt.event.*;
 import java.util.*;
 public class Panel extends JPanel implements KeyListener , Runnable,ActionListener,MouseListener
-{	private JButton fight,runaway,medKit,forceShock,forceSlam,forcePush;
-    private JButton force,blaster;
+{
     private Hero hero;
-    private boolean nextLevel,moved;
     private Map map;
-    private boolean fighting=false;
-    private JLabel roomText,infoText,item1,item2,item3,item4,item5,damage;
     private Enemy enemy;
-    private boolean removeItemMode=false;
-    private Rectangle item1Click=new Rectangle(565, 185, 55, 55);
-    private Rectangle item2Click=new Rectangle(565, 185, 55, 55);
-    private Rectangle item3Click= new Rectangle(620, 185, 55, 55);
-    private Rectangle item4Click=new Rectangle(675, 185, 55, 55);
-    private Rectangle item5Click=new Rectangle(565, 240, 55, 55);
     private Item item;
+
+    // initial choices the hero will have
+    private JButton fight,runaway,medKit;
+
+    //button to choice the type of attack
+    private JButton force,blaster;
+
+    //button to choose the type of force attack
+    private JButton forceShock,forceSlam,forcePush;
+
+    //booleans that will determine the actions available
+    private boolean nextLevel=false ,moved;
+    private boolean fighting=false;
+    private boolean removeItemMode=false;
+
+    //labels written the GUI
+    private JLabel roomText,infoText,item1,item2,item3,item4,item5,damage;
+
+    //rectangles to erase an item if we have a full set
+    private Rectangle item1Click=new Rectangle(565, 185, 55, 55);
+    private Rectangle item2Click=new Rectangle(620, 185, 55, 55);
+    private Rectangle item3Click= new Rectangle(675, 185, 55, 55);
+    private Rectangle item4Click=new Rectangle(565, 240, 55, 55);
+    private Rectangle item5Click=new Rectangle(620, 240, 55, 55);
+
+       
+
     public Panel()
     {
         addMouseListener(this);
-        nextLevel=false;
         this.setLayout(null);
         setBackground(Color.WHITE);
         addKeyListener(this);
         setFocusable(true);
+
+        //we create the variables needed for the games
         map=Map.getInstance();
         map.loadMap(1);
         hero=new Hero("brandon",map);
+
+        //we create the buttons
         forceSlam=new JButton("forceSlam");
         forceShock=new JButton("forceShock");
         forcePush=new JButton("forcePush");
@@ -38,6 +58,8 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
         medKit=new JButton("Medkit");
         force=new JButton("Force");
         blaster=new JButton("blaster");
+
+        //we locate the buttons in our GUI
         runaway.setBounds(555, 490, 100, 18);
         fight.setBounds(555, 520, 100, 18);
         medKit.setBounds(555,540,100,18);
@@ -46,6 +68,8 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
         forceSlam.setBounds(555, 490, 100, 18);
         forcePush.setBounds(555, 520, 100, 18);
         forceShock.setBounds(555,530,100,18);
+
+
         blaster.addActionListener(this);
         runaway.addActionListener(this);
         fight.addActionListener(this);
@@ -54,6 +78,8 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
         forcePush.addActionListener(this);
         forceShock.addActionListener(this);
         medKit.addActionListener(this);
+
+        //we put all our buttons in our GUI
         this.add(force);
         this.add(blaster);
         this.add(forceSlam);
@@ -62,6 +88,8 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
         this.add(runaway);
         this.add(fight);
         this.add(medKit);
+
+        //we make some buttons invisible
         force.setVisible(false);
         blaster.setVisible(false);
         runaway.setVisible(false);
@@ -69,10 +97,9 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
         forceSlam.setVisible(false);
         forcePush.setVisible(false);
         forceShock.setVisible(false);
-
         medKit.setVisible(false);
 
-
+        //room information
         roomText=new JLabel("");
         infoText=new JLabel("");
         roomText.setBounds(600, 380, 300, 30);
@@ -85,6 +112,7 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
         damage.setVisible(false);
         this.add(damage);
 
+        //here we fill all the items that the hero has
         item1=new JLabel("");
         item2=new JLabel("");
         item3=new JLabel("");
@@ -111,6 +139,7 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
 
         super.paintComponent(g);
 
+        //we fill the items that the heroes has
         item1.setText(hero.getFirstItem());
         item2.setText(hero.getSecondItem());
         item3.setText(hero.getThirdItem());
@@ -118,7 +147,7 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
         item5.setText(hero.getFifthItem());
 
         Point heroLocation=hero.getLocation();
-
+        //here we draw everything in the GUI
         int mapStartX=30;
         int mapStartY=30;
         for(int j=0;j<5;j++)
@@ -157,6 +186,7 @@ public class Panel extends JPanel implements KeyListener , Runnable,ActionListen
 
     }
 
+    //we make a function in order to be able to eliminate an item by clicking a number
     public void keyPressed(KeyEvent e)
     {
         if(e.getKeyCode()==KeyEvent.VK_1 && removeItemMode)
